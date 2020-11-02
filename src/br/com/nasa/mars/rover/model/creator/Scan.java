@@ -1,70 +1,63 @@
-package br.com.nasa.mars.rover.model;
+package br.com.nasa.mars.rover.model.creator;
 
 import br.com.nasa.mars.rover.cardinalDirection.CardinalDirection;
 import br.com.nasa.mars.rover.cardinalDirection.enumerator.CardinalDirectionEnum;
 import br.com.nasa.mars.rover.instruction.Instruction;
 import br.com.nasa.mars.rover.instruction.enumerator.InstructionEnum;
-import br.com.nasa.mars.rover.printer.MarsPlateauSize;
-import br.com.nasa.mars.rover.printer.Printer;
-import br.com.nasa.mars.rover.printer.WelcomeMessage;
+import br.com.nasa.mars.rover.model.MarsPlateau;
+import br.com.nasa.mars.rover.model.Probe;
+import br.com.nasa.mars.rover.printer.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Scan implements MarsPlateauCreator {
+    private MarsPlateau marsPlateau = new MarsPlateau();
+    private Scanner scanner;
 
-    MarsPlateau marsPlateau = new MarsPlateau();
-    private int[][] plateauSize;
-    private Scanner scanner = new Scanner(System.in);
+    private Printer welcomeMessage = new WelcomeMessage();
+    private Printer plateauSizeMessage = new MarsPlateauSize();
+    private Printer probesQuantity = new ProbesQuantity();
+    private Printer probePositionAndCardinal = new ProbePositionAndCardinalDirection();
+    private Printer probeInstruction = new ProbeInstruction();
 
     @Override
     public MarsPlateau create() {
-        printInitialMessage();
+        welcomeMessage.print();
 
+        scanner = new Scanner(System.in);
         getPlateauSize();
-        getProbeQuantity();
+        getProbesInformation();
 
         scanner.close();
         return marsPlateau;
     }
 
-    private void addProbe(){
-        System.out.println(" Type the position and the Cardinal Direction ");
+    private void addProbeInPlateau() {
+        probePositionAndCardinal.print();
         String probeText = scanner.nextLine();
 
         int[] position = getProbePosition(probeText);
         CardinalDirection cardinalDirection = getProbeCardinalDirection(probeText);
-
-        System.out.println(" Type the instructions ");
-        String instructionsText = scanner.nextLine();
-        List<Instruction> instructionList = getProbeInstructions(instructionsText);
+        List<Instruction> instructionList = getProbeInstructions();
 
         Probe probe = new Probe(position, cardinalDirection, instructionList);
         marsPlateau.addProbe(probe);
     }
 
-    private int getProbeQuantity() {
-        System.out.println(" Type the quantity of probes: ");
+    private void getProbesInformation() {
+        probesQuantity.print();
         int numberOfProbes = scanner.nextInt();
-
         scanner.nextLine();
+
         while (numberOfProbes-- > 0) {
-            addProbe();
+            addProbeInPlateau();
         }
-
-        return numberOfProbes;
-    }
-
-    private void printInitialMessage() {
-        Printer welcomeMessage = new WelcomeMessage();
-        welcomeMessage.print();
     }
 
     private void getPlateauSize() {
-        Printer plateauSizeMessage = new MarsPlateauSize();
         plateauSizeMessage.print();
-
         String text = scanner.nextLine();
 
         int x = getIntInText(text, 0) ;
@@ -86,15 +79,23 @@ public class Scan implements MarsPlateauCreator {
         return cardinalDirection;
     }
 
-    private List<Instruction> getProbeInstructions(String instructionsText){
-        List<Instruction> instructions = new ArrayList<Instruction>();
+    private List<Instruction> getProbeInstructions(){
+        probeInstruction.print();
+        String probeInstructions = scanner.nextLine();
 
-        for (int i = 0; i < instructionsText.length(); i++) {
-            Instruction instruction = InstructionEnum.findByKey(instructionsText.substring(i, i+1));
+        List<Instruction> instructions = new ArrayList<Instruction>();
+        for (int i = 0; i < probeInstructions.length(); i++) {
+            Instruction instruction = getInstructionInText(probeInstructions, i);
             instructions.add(instruction);
         }
 
         return instructions;
+    }
+
+    private Instruction getInstructionInText(String probeInstructions, int i) {
+        String textInstruction = probeInstructions.substring(i, i + 1);
+        Instruction instruction = InstructionEnum.findByKey(textInstruction);
+        return instruction;
     }
 
     private int getIntInText(String text, int position) {

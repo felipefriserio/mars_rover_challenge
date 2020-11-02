@@ -1,7 +1,6 @@
 package br.com.nasa.mars.rover.printer;
 
 public class WelcomeMessage implements Printer {
-
     @Override
     public void print() {
         System.out.println(" -----------------------------------------------------------------------------------------------------");
@@ -10,4 +9,7 @@ public class WelcomeMessage implements Printer {
         System.out.println(" ------------- Welcome to the most awesome martian system. A system from another world! --------------");
         System.out.println(" -----------------------------------------------------------------------------------------------------");
     }
+
+    @Override
+    public void print(Object[] args) {}
 }

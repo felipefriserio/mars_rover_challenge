@@ -25,4 +25,9 @@ public class West implements CardinalDirection {
 	public CardinalDirectionEnum getCardinal() {
 		return CardinalDirectionEnum.WEST;
 	}
+
+	@Override
+	public String toString() {
+		return getCardinal().getKey();
+	}
 }

@@ -19,13 +19,19 @@ public class Probe {
 		this.cardinalDirection = cardinalDirection;
 		this.instructions      = instructions;
 	}
-	
+
 	public int[] getPosition() {
 		return position;
 	}
+
+	public void setPosition(int[] position) {
+		this.position = position;
+	}
+
 	public CardinalDirection getCardinalDirection() {
 		return cardinalDirection;
 	}
+
 	public void setCardinalDirection(CardinalDirection cardinalDirection) {
 		this.cardinalDirection = cardinalDirection;
 	}
@@ -33,7 +39,11 @@ public class Probe {
 	public List<Instruction> getInstructions() {
 		return instructions;
 	}
-	
+
+	public void setInstructions(List<Instruction> instructions) {
+		this.instructions = instructions;
+	}
+
 	public void executeInstructions(){
 		for (Instruction instruction : instructions) {
 			  instruction.execute(this);
@@ -42,6 +52,6 @@ public class Probe {
 	
 	@Override
 	public String toString() {
-		return "Probe = ["+ position[0]+"]["+ position[1]+"], "+ cardinalDirection;
+		return position[0] + " " + position[1] + " " + cardinalDirection;
 	}
 }

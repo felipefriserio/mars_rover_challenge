@@ -9,9 +9,7 @@ public class North implements CardinalDirection {
 		return new West();
 	}
 
-	public CardinalDirection turnRight() {
-		return new East();
-	}
+	public CardinalDirection turnRight() {return new East();}
 
 	public void move(Probe probe) {
 		int[] position = probe.getPosition();
@@ -20,5 +18,10 @@ public class North implements CardinalDirection {
 	
 	public CardinalDirectionEnum getCardinal() {
 		return CardinalDirectionEnum.NORTH;
+	}
+
+	@Override
+	public String toString() {
+		return getCardinal().getKey();
 	}
 }

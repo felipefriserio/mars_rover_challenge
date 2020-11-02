@@ -22,4 +22,8 @@ public class East implements CardinalDirection {
 		return CardinalDirectionEnum.EAST;
 	}
 
+	@Override
+	public String toString() {
+		return getCardinal().getKey();
+	}
 }
