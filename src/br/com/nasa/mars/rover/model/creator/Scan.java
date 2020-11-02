@@ -16,15 +16,11 @@ public class Scan implements MarsPlateauCreator {
     private MarsPlateau marsPlateau = new MarsPlateau();
     private Scanner scanner;
 
-    private Printer welcomeMessage = new WelcomeMessage();
-    private Printer plateauSizeMessage = new MarsPlateauSize();
-    private Printer probesQuantity = new ProbesQuantity();
-    private Printer probePositionAndCardinal = new ProbePositionAndCardinalDirection();
-    private Printer probeInstruction = new ProbeInstruction();
+    private Printer printer = new SystemOutPrintln();
 
     @Override
     public MarsPlateau create() {
-        welcomeMessage.print();
+        printer.welcomeMessage();
 
         scanner = new Scanner(System.in);
         getPlateauSize();
@@ -35,7 +31,7 @@ public class Scan implements MarsPlateauCreator {
     }
 
     private void addProbeInPlateau() {
-        probePositionAndCardinal.print();
+        printer.probePositionsAndCardinalDirection();
         String probeText = scanner.nextLine();
 
         int[] position = getProbePosition(probeText);
@@ -47,7 +43,7 @@ public class Scan implements MarsPlateauCreator {
     }
 
     private void getProbesInformation() {
-        probesQuantity.print();
+        printer.probesQuantity();
         int numberOfProbes = scanner.nextInt();
         scanner.nextLine();
 
@@ -57,7 +53,7 @@ public class Scan implements MarsPlateauCreator {
     }
 
     private void getPlateauSize() {
-        plateauSizeMessage.print();
+        printer.marsPlateauSize();
         String text = scanner.nextLine();
 
         int x = getIntInText(text, 0) ;
@@ -80,7 +76,7 @@ public class Scan implements MarsPlateauCreator {
     }
 
     private List<Instruction> getProbeInstructions(){
-        probeInstruction.print();
+        printer.probeInstruction();
         String probeInstructions = scanner.nextLine();
 
         List<Instruction> instructions = new ArrayList<Instruction>();

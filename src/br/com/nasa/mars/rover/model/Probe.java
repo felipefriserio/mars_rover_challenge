@@ -1,12 +1,10 @@
 package br.com.nasa.mars.rover.model;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.nasa.mars.rover.cardinalDirection.CardinalDirection;
 import br.com.nasa.mars.rover.instruction.Instruction;
-import br.com.nasa.mars.rover.instruction.enumerator.InstructionEnum;
 
 public class Probe {
 	
