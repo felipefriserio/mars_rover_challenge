@@ -10,11 +10,10 @@ import br.com.nasa.mars.rover.printer.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class Scan implements MarsPlateauCreator {
+public class UserInputScanner implements MarsPlateauCreator {
     private MarsPlateau marsPlateau = new MarsPlateau();
-    private Scanner scanner;
+    private java.util.Scanner scanner;
 
     private Printer printer = new SystemOutPrintln();
 
@@ -22,7 +21,7 @@ public class Scan implements MarsPlateauCreator {
     public MarsPlateau create() {
         printer.welcomeMessage();
 
-        scanner = new Scanner(System.in);
+        scanner = new java.util.Scanner(System.in);
         getPlateauSize();
         getProbesInformation();
 
@@ -71,8 +70,7 @@ public class Scan implements MarsPlateauCreator {
 
     private CardinalDirection getProbeCardinalDirection(String probeText){
         String text = probeText.split(" ")[2];
-        CardinalDirection cardinalDirection = CardinalDirectionEnum.findByKey(text);
-        return cardinalDirection;
+        return CardinalDirectionEnum.findByKey(text);
     }
 
     private List<Instruction> getProbeInstructions(){

@@ -6,7 +6,7 @@ import br.com.nasa.mars.rover.model.Probe;
 public interface CardinalDirection {
 
 	public CardinalDirectionEnum getCardinal();
-	public CardinalDirection turnLeft();
-	public CardinalDirection turnRight();
+	public void turnLeft(Probe probe);
+	public void turnRight(Probe probe);
 	public void move(Probe probe);
 }

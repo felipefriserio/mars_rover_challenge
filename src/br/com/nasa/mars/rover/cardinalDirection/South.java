@@ -5,11 +5,13 @@ import br.com.nasa.mars.rover.model.Probe;
 
 public class South implements CardinalDirection {
 
-	public CardinalDirection turnLeft() {
-		return new East();
+	public void turnLeft(Probe probe) {
+		probe.setCardinalDirection(new East());
 	}
 
-	public CardinalDirection turnRight() {return new West();}
+	public void turnRight(Probe probe) {
+		probe.setCardinalDirection(new West());
+	}
 
 	public void move(Probe probe) {
 		int[] position = probe.getPosition();

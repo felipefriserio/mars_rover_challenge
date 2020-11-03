@@ -9,12 +9,12 @@ public class West implements CardinalDirection {
 		return CardinalDirectionEnum.WEST;
 	}
 	
-	public CardinalDirection turnLeft() {
-		return new South();
+	public void turnLeft(Probe probe) {
+		probe.setCardinalDirection(new South());
 	}
 
-	public CardinalDirection turnRight() {
-		return new North();
+	public void turnRight(Probe probe) {
+		probe.setCardinalDirection(new North());
 	}
 
 	public void move(Probe probe) {

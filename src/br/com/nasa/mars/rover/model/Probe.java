@@ -1,18 +1,19 @@
 package br.com.nasa.mars.rover.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.nasa.mars.rover.cardinalDirection.CardinalDirection;
 import br.com.nasa.mars.rover.instruction.Instruction;
 
+import java.util.List;
+
 public class Probe {
-	
+
 	private int[] position;
 	private CardinalDirection cardinalDirection;
-	private List<Instruction> instructions = new ArrayList<Instruction>();
+	private List<Instruction> instructions;
 
-	public Probe(int[] position, CardinalDirection cardinalDirection, List<Instruction> instructions){
+	public Probe(int[] position,
+				 CardinalDirection cardinalDirection,
+				 List<Instruction> instructions){
 		this.position          = position;
 		this.cardinalDirection = cardinalDirection;
 		this.instructions      = instructions;
@@ -47,7 +48,17 @@ public class Probe {
 			  instruction.execute(this);
 		}
 	}
-	
+
+	public void turnLeft(){
+		this.cardinalDirection.turnLeft(this);
+	}
+	public void turnRight(){
+		this.cardinalDirection.turnRight(this);
+	}
+	public void move(){
+		this.cardinalDirection.move(this);
+	}
+
 	@Override
 	public String toString() {
 		return position[0] + " " + position[1] + " " + cardinalDirection;

@@ -5,6 +5,6 @@ import br.com.nasa.mars.rover.model.Probe;
 public class Move implements Instruction {
 	@Override
 	public void execute(Probe probe) {
-		probe.getCardinalDirection().move(probe);
+		probe.move();
 	}
 }
